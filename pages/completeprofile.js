@@ -5,45 +5,40 @@ import axios from 'axios';
 import ErrorCard from '../components/error'
 
 
-export default function LoginScreen({ navigation }) {
+
+export default function CompleteProfileScreen({ navigation, route }) {
     // const [text, onChangeText] = React.useState("Useless Text");
-    const [number, onChangeNumber] = React.useState(null); 
-    // const [token, onChangeToken] = React.useState(null);
+    const [name, onChangeName] = React.useState(''); 
+    const [grade, onChangeGrade] = React.useState('');
     const [err, seterr] = React.useState('');
 
     async function onPressFunction(){
-      if (isNaN(number)) {
-        seterr("Please enter numbers only")
-        console.log(err)
-      } else if (number.toString().length != 10){
-        seterr("Please enter a valid 10 digit phone number")
-        console.log(err)
-      } else {
-        const baseurl = 'http://localhost:3000' + '/auth/getcode'
-        await axios({
-          method: 'get',
-          url: baseurl + '?phone_number=' + number,
-          responseType: 'json'
-        })
-        .then(function (response) {
-          console.log(response.data);
-          // onChangeToken(response.data.token);
-          console.log("bruh")
-          // console.log(token)
-          console.log(response.data.token)
-          if (response.data.token != null) {
-            navigation.navigate('Verify', {
-              phone_number: number,
-              token: response.data.token,
+        if (name == '' || grade == '') {
+            console.log("at least one is empty")
+            seterr("Please enter all fields")
+
+        } else {
+            const baseurl = 'http://localhost:3000' + '/auth/create'
+            await axios({
+                method: 'get',
+                url: baseurl + '?name=' + name + '&grade=' + grade + '&phone_number=' + route.params.phone_number,
+                responseType: 'json'
             })
-          }
-        })
+            .then(function (response) {
+                console.log(response.data);
+                if (response.data.status == 'success'){
+                    navigation.navigate('PreHome')
+                } else {
+                    console.log("katgaya")
+                }
+            
+            })
 
-        .catch(function (error) {
-          console.log(error);
-
-        });
-      }     
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+      
       
     }
 
@@ -53,33 +48,45 @@ export default function LoginScreen({ navigation }) {
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.viewtemplate}>
         <View style={styles.centerview}>
-
-          {err != ''
-          ? <ErrorCard title={err}/>
-          : null}
-
-          <Text style={{fontSize: 40, fontWeight: '700', color: 'white'}}>sign up / log in</Text>
+            {err != ''
+            ? <ErrorCard title={err}/>
+            : null}
+            <Text style={{fontSize: 40, fontWeight: '700', color: 'white'}}>complete your profile</Text>
         </View>
 
         <View>
-        <Text style={styles.titleinput}>Phone Number</Text>
+            <Text style={styles.titleinput}>Name</Text>
         </View>
         
         <View style={styles.centerview}>
           <TextInput
             style={styles.datainput}
-            onChangeText={onChangeNumber}
+            onChangeText={onChangeName}
             autoFocus={true}
-            value={number}
+            value={name}
             placeholder="Enter your Phone Number"
             placeholderTextColor="#000" 
           />
-          {/* <Pressable style={styles.button} onPress={() => navigation.navigate('Verify')}> */}
-          <Pressable style={styles.button} onPress={onPressFunction}>
-            <Text style={styles.text}>Continue</Text>
-          </Pressable>
-  
         </View>
+
+        <View>
+            <Text style={styles.titleinput}>Grade</Text>
+        </View>
+        
+        <View style={styles.centerview}>
+          <TextInput
+            style={styles.datainput}
+            onChangeText={onChangeGrade}
+            value={grade}
+            placeholder="Enter your Phone Number"
+            placeholderTextColor="#000" 
+          />
+        </View>
+
+        {/* <Pressable style={styles.button} onPress={() => navigation.navigate('Verify')}> */}
+        <Pressable style={styles.button} onPress={onPressFunction}>
+            <Text style={styles.text}>Continue</Text>
+        </Pressable>
   
       </SafeAreaView>
       </>

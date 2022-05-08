@@ -2,21 +2,36 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, Pressable, SafeAreaView, TextInput, Button, StyleSheet, Text, View } from 'react-native';
 
+import Home1Screen from './home1'
+import Home2Screen from './home2'
 
 export default function PreHomeScreen({ navigation }) {
+    const [name, setname] = useState('John Doe');
     return (
       <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.viewtemplate}>
         <View style={styles.centerview}>
+          <Text style={{fontSize: 40, fontWeight: '700', color: 'white'}}>Hello, {name}</Text>
           <View style={styles.card}>
-            <Pressable onPress={() => navigation.navigate('Login')}>
+            <View style={styles.cardimageview}>
+              <Image source={require('../images/share1.png')} style={styles.cardImage} /> 
+            </View>
+            <Pressable onPress={() => navigation.navigate('Home1')}>
               <Text style={styles.text}>I’m Looking to Donate Books!</Text>
             </Pressable>  
           </View>
           <View style={styles.card}>
-          <Text style={styles.text}>I’m Looking to Get Used books!</Text>
+            <View style={styles.cardimageview}>
+              <Image source={require('../images/share2.png')} style={styles.cardImage} />
+            </View>
+            <Pressable onPress={() => navigation.navigate('Home2')}>
+              <Text style={styles.text}>I’m Looking to Get Used books!</Text>
+            </Pressable>
           </View>
+          <Pressable style={styles.button} onPress={() => navigation.navigate('Manage')}>
+              <Text style={styles.text}>Manage Listings</Text>
+            </Pressable>
         </View>    
       </SafeAreaView>
       </>
@@ -41,9 +56,12 @@ const styles = StyleSheet.create({
 
     card: {
         backgroundColor: '#E6E6E6',
-        width: '80%',
-        height: '20%',
+        width: '65%',
+        height: '30%',
         marginVertical: '5%',
+        paddingVertical: '10%',
+        paddingHorizontal: '5%',
+        borderRadius: 15,
     },
 
     button: {
@@ -62,10 +80,23 @@ const styles = StyleSheet.create({
         marginVertical: '5%'
     },
     text: {
-        fontSize: 16,
+        fontSize: 14,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'black',
+        textAlign:'center'
+        
+    },
+    cardImage: {
+      // marginHorizontal: '10%',
+      // marginVertical: '5%',
+      resizeMode: 'cover',
+      width: '100%',
+      height: '100%'
+    },
+    cardimageview: {
+      marginHorizontal: '10%',
+      // marginVertical: '5%'
     },
 });

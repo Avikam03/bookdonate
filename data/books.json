@@ -1,0 +1,43 @@
+{
+    "book1": {
+        "name": "NCERT Class 10 Social Science Textbook",
+        "description": "Almost new condition",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book2": {
+        "name": "NCERT Class 10 Science Textbook",
+        "description": "NCERT Class 10 Science Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book3": {
+        "name": "NCERT Class 12 Commerce Textbook",
+        "description": "NCERT Class 10 Commerce Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book4": {
+        "name": "NCERT Class 12 Physics Textbook",
+        "description": "NCERT Class 12 Physics Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book5": {
+        "name": "NCERT Class 12 Chemistry Textbook",
+        "description": "NCERT Class 12 Chemistry Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book6": {
+        "name": "NCERT Class 12 Biology Textbook",
+        "description": "NCERT Class 12 Biology Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book7": {
+        "name": "NCERT Class 12 Mathematics Textbook",
+        "description": "NCERT Class 12 Mathematics Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    },
+    "book8": {
+        "name": "NCERT Class 12 Political Science Textbook",
+        "description": "NCERT Class 12 Political Science Textbook",
+        "image": "https://s3.ap-south-1.amazonaws.com/asset.plexuss.com/social_science_textbook/social_science_textbook_cover.jpg"
+    } 
+}
+

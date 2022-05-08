@@ -9,7 +9,10 @@ import LandingScreen from './pages/landing';
 import VerifyScreen from './pages/verify';
 import LoginScreen from './pages/login';
 import PreHomeScreen from './pages/prehome'
-
+import Home1Screen from './pages/home1'
+import Home2Screen from './pages/home2'
+import ManageScreen from './pages/manage'
+import CompleteProfileScreen from './pages/completeprofile'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +24,7 @@ export default function App() {
         initialRouteName="Landing" 
         headerMode="float"
         screenOptions={{
+          title: null,
           headerStyle: {
             backgroundColor: '#004643',
           },
@@ -28,6 +32,7 @@ export default function App() {
             color: 'white'
           },
           headerTintColor: 'white',
+          headerBackTitleVisible: false
         }}
       >
         <Stack.Screen name="Landing" component={LandingScreen} 
@@ -38,6 +43,10 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Verify" component={VerifyScreen} />
         <Stack.Screen name="PreHome" component={PreHomeScreen} />
+        <Stack.Screen name="Home1" component={Home1Screen} />
+        <Stack.Screen name="Home2" component={Home2Screen} />
+        <Stack.Screen name="Manage" component={ManageScreen} />
+        <Stack.Screen name="CompleteProfile" component={CompleteProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

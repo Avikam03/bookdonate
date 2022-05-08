@@ -10,7 +10,7 @@ export default function LandingScreen({ navigation }) {
             animated={true}
             barStyle="light-content"
         />
-        {/* <Image source={require('../images/landing.svg')} /> */}
+        <Image style={styles.illus} source={require('../images/landing.png')} />
         <Text style={{fontSize: 40, fontWeight: '700'}}>
           <Text style={{color: 'white'}}>Book</Text>
           <Text style={{color: '#F9BC60'}}>Don8</Text>
@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#004643',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+
+    illus: {
+      marginHorizontal: '10%',
+      marginVertical: '10%',
+      height: 300,
+      width: 300
     },
 
     button: {

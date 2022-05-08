@@ -1,15 +1,57 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, Pressable, SafeAreaView, TextInput, Button, StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
+import ErrorCard from '../components/error'
 
 
-export default function VerifyScreen({ navigation }) {
+export default function VerifyScreen({ navigation, route }) {
     const [number, onChangeNumber] = React.useState(null); 
+    const phone_number = route.params.phone_number
+    const token = route.params.token
+    const [err, seterr] = React.useState('');
+
+    async function onPressFunction(){
+
+      if (isNaN(number)) {
+        seterr("Please enter numbers only")
+      } else if (number.toString().length != 4) {
+        seterr("Please enter a valid 4 digit OTP")
+      } else {
+        const baseurl = 'http://localhost:3000' + '/auth/verify'
+
+        await axios({
+          method: 'get',
+          url: baseurl + '?phone_number=' + phone_number + '&token=' + token + '&otp=' + number,
+          responseType: 'json'
+        })
+        .then(function (response) {
+          console.log(response.data);
+          if (response.data.exists == 'true') {
+            navigation.navigate('PreHome')
+          } else {
+            navigation.navigate('CompleteProfile', {
+              phone_number: phone_number,
+            })
+          }
+        
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+
+      
+    }
+
     return (
       <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.viewtemplate}>
         <View style={styles.centerview}>
+          {err != ''
+          ? <ErrorCard title={err}/>
+          : null}
           <Text style={{fontSize: 40, fontWeight: '700', color: 'white'}}>verify your phone number!</Text>
           <TextInput
             style={styles.datainput}
@@ -20,7 +62,8 @@ export default function VerifyScreen({ navigation }) {
             placeholderTextColor="#000" 
             keyboardType="numeric"
           />
-          <Pressable style={styles.button} onPress={() => navigation.navigate('PreHome')}>
+          {/* <Pressable style={styles.button} onPress={() => navigation.navigate('PreHome')}> */}
+          <Pressable style={styles.button} onPress={onPressFunction}>
             <Text style={styles.text}>Continue</Text>
           </Pressable>
         </View>
