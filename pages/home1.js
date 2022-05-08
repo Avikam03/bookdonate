@@ -2,12 +2,28 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, Pressable, SafeAreaView, TextInput, Button, StyleSheet, Text, View } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 export default function Home1Screen({ navigation }) {
     const [bookname, setbookname] = useState('');
     const [description, setdescription] = useState('');
     const [selectedValue, setSelectedValue] = useState('Select a book');
+    const [base64, setbase64] = useState('');
+
+    async function onPressFunction(){
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+        alert("Permission to access camera roll is required!");
+        return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+    }
 
     return(
         <>
@@ -31,6 +47,10 @@ export default function Home1Screen({ navigation }) {
                 placeholder="Enter Description"
                 placeholderTextColor="#000" 
             />
+            <Pressable style={styles.button} onPress={onPressFunction}>
+                <Text style={styles.text}>Upload Image</Text>
+            </Pressable>
+
             <Picker
                 selectedValue={selectedValue}
                 style={{ height: 50, width: 150 }}
@@ -46,6 +66,9 @@ export default function Home1Screen({ navigation }) {
                 <Picker.Item label="Biography" value="Biography" />
                 <Picker.Item label="Children" value="Children" />
             </Picker>
+
+            
+
             </View>    
         </SafeAreaView>
       </>
